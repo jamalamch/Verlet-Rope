@@ -17,7 +17,8 @@ public class RopeBridge : RopeBase
         for (int i = 0; i < segmentLength; i++)
         {
             Vector3 ropeStartPoint = Vector3.Lerp(StartPoint.position, EndPoint.position, (i * ropeSegLen) / (distance * 0.93f));
-            ropeStartPoint.y += Mathf.SmoothStep(0, distance * 0.5f,1 - Mathf.Abs((distance * 0.5f) - i * ropeSegLen)/ (distance*0.5f));
+            ropeStartPoint.y += Mathf.SmoothStep(0, Mathf.Abs((StartPoint.position.x - EndPoint.position.x) * 0.5f),1 - Mathf.Abs((distance * 0.5f) - i * ropeSegLen)/ (distance*0.5f));
+            ropeStartPoint.x += Mathf.SmoothStep(0, Mathf.Abs((StartPoint.position.y - EndPoint.position.y) * 0.5f),1 - Mathf.Abs((distance * 0.5f) - i * ropeSegLen)/ (distance*0.5f));
             this.ropeSegments.Add(new RopeSegment(ropeStartPoint));
         }
     }
